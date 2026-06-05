@@ -1,0 +1,88 @@
+<style>
+.search-form{
+    width: 28rem;
+    display: flex;
+    align-items: center;
+}
+
+.search-input{
+    border-radius: 25px;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+
+.search-input:focus{
+    border-color: #af2b3d;
+    box-shadow: 0 0 0 0.15rem rgba(175, 43, 61, 0.15);
+}
+
+.search-btn{
+    background-color: #af2b3d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.6rem 1rem;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.search-btn:hover{
+    background-color: #962435;
+    color: white;
+}
+
+.search-btn i{
+    font-size: 0.9rem;
+}
+
+@media(max-width:768px){
+    .search-form{
+        width: 100%;
+        margin: 1rem 0;
+    }
+}
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <!-- <a class="nav-link" aria-current="page" href="/">Home</a> -->
+        <a class="nav-link" href="/listings">Explore</a>
+        <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex search-form" role="search">
+          <input class="form-control search-input" type="search" placeholder="Search destination" aria-label="Search" />
+
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+          </button>
+        </form>
+      </div>
+
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if(!currUser){ %>
+          <a class="nav-link" aria-current="page" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>Login</b></a>
+          <% } %>
+            <% if(currUser){ %>
+              <a class="nav-link" href="/logout"><b>Logout</b></a>
+              <% } %>
+                <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
+      </div>
+    </div>
+  </div>
+</nav>

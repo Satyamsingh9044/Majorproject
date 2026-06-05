@@ -1,0 +1,190 @@
+<% layout("/layouts/boilerplate") %>
+
+<%= success %>
+
+<style>
+#filters{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Filter Icons */
+.filter{
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p{
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+}
+
+.filter i{
+    font-size: 1.2rem;
+}
+
+/* Tax Toggle Card */
+.tax-toggle{
+    margin-left: auto; /* pushes card to right */
+
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 0.75rem 1rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.tax-toggle:hover{
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.tax-toggle .form-check{
+    margin: 0;
+}
+
+.tax-toggle .form-check-label{
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    margin: 0;
+}
+
+.tax-toggle .form-check-input{
+    cursor: pointer;
+    width: 2.5rem;
+    height: 1.3rem;
+}
+
+/* GST text hidden initially */
+.tax-info{
+    display: none;
+}
+</style>
+
+<div id="filters">
+
+    <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Room</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic Cities</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castle</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-tent-arrow-down-to-line"></i></div>
+        <p>Camping</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-plate-wheat"></i></div>
+        <p>Farm</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-igloo"></i></div>
+        <p>Arctic</p>
+    </div>
+
+    <!-- Tax Toggle on Right -->
+    <div class="tax-toggle">
+        <label class="form-check-label" for="switchCheckDefault">
+            Display Total After Taxes
+        </label>
+
+        <div class="form-check form-switch">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="switchCheckDefault"
+            >
+        </div>
+    </div>
+
+</div>
+
+<div class="listing-container">
+    <% for(let listing of allListings){ %>
+
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+
+            <div class="listing-card">
+
+                <img
+                    src="<%= listing.image?.url || '/images/default.jpg' %>"
+                    class="listing-img"
+                    alt="listing"
+                >
+
+                <div class="listing-info">
+
+                    <h3 class="listing-title">
+                        <%= listing.title %>
+                    </h3>
+
+                    <p class="listing-price">
+                        ₹ <%= listing.price.toLocaleString("en-IN") %>/night
+                        <span class="tax-info"> +18% GST</span>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    <% } %>
+</div>
+
+<script>
+const taxSwitch = document.getElementById("switchCheckDefault");
+
+taxSwitch.addEventListener("change", () => {
+    const taxInfos = document.querySelectorAll(".tax-info");
+
+    taxInfos.forEach(info => {
+        info.style.display = taxSwitch.checked ? "inline" : "none";
+    });
+});
+</script>
